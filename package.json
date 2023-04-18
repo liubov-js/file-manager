@@ -1,0 +1,22 @@
+{
+  "name": "file-manager",
+  "version": "1.0.0",
+  "description": "File Manager using Node.js APIs",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js -- ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liubov-js/file-manager.git"
+  },
+  "author": "Liubov Krivtsova",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/liubov-js/file-manager/issues"
+  },
+  "homepage": "https://github.com/liubov-js/file-manager#readme",
+  "keywords": []
+}
