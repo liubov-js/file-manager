@@ -1,6 +1,7 @@
 import readline from 'readline';
 import * as os from "os";
 import { getList, goToDir, goUpper } from "./helpers/navigation.js";
+import {copy, createFile, move, readFile, remove, rename} from "./helpers/files.js";
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -38,6 +39,40 @@ const awaitedQuery = async () => query = await prompt('');
         goToDir(pathToDir);
       } else if (query === 'ls') {
         getList();
+      } else if (query.startsWith('cat ')) {
+        let pathToFile = query.replace('cat ', '');
+        readFile(pathToFile);
+      } else if (query.startsWith('add ')) {
+        let newFileName = query.replace('add ', '');
+        createFile(newFileName);
+      } else if (query.startsWith('rn ')) {
+        const commandChunks = query.split(' ');
+        if (commandChunks.length === 3) {
+          rename(commandChunks[1], commandChunks[2]);
+        } else {
+          console.error('Invalid input');
+        }
+      } else if (query.startsWith('cp ')) {
+        const commandChunks = query.split(' ');
+        if (commandChunks.length === 3) {
+          copy(commandChunks[1], commandChunks[2]);
+        } else {
+          console.error('Invalid input');
+        }
+      } else if (query.startsWith('mv ')) {
+        const commandChunks = query.split(' ');
+        if (commandChunks.length === 3) {
+          move(commandChunks[1], commandChunks[2]);
+        } else {
+          console.error('Invalid input');
+        }
+      } else if (query.startsWith('rm ')) {
+        const commandChunks = query.split(' ');
+        if (commandChunks.length === 2) {
+          remove(commandChunks[1]);
+        } else {
+          console.error('Invalid input');
+        }
       } else if (query === '.exit') {
         rl.close();
       } else {
