@@ -1,7 +1,8 @@
 import readline from 'readline';
 import * as os from "os";
 import { getList, goToDir, goUpper } from "./helpers/navigation.js";
-import {copy, createFile, move, readFile, remove, rename} from "./helpers/files.js";
+import { copy, createFile, move, readFile, remove, rename } from "./helpers/files.js";
+import { calcHash } from "./helpers/hash.js";
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -94,6 +95,13 @@ const awaitedQuery = async () => query = await prompt('');
             break;
           default:
             console.log('Invalid input');
+        }
+      } else if (query.startsWith('hash ')) {
+        const commandChunks = query.split(' ');
+        if (commandChunks.length === 2) {
+          calcHash(commandChunks[1]);
+        } else {
+          console.error('Invalid input');
         }
       } else if (query === '.exit') {
         rl.close();
