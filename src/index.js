@@ -3,6 +3,7 @@ import * as os from "os";
 import { getList, goToDir, goUpper } from "./helpers/navigation.js";
 import { copy, createFile, move, readFile, remove, rename } from "./helpers/files.js";
 import { calcHash } from "./helpers/hash.js";
+import { compress, decompress } from "./helpers/compress-decompress.js";
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -100,6 +101,20 @@ const awaitedQuery = async () => query = await prompt('');
         const commandChunks = query.split(' ');
         if (commandChunks.length === 2) {
           calcHash(commandChunks[1]);
+        } else {
+          console.error('Invalid input');
+        }
+      } else if (query.startsWith('compress ')) {
+        const commandChunks = query.split(' ');
+        if (commandChunks.length === 3) {
+          compress(commandChunks[1], commandChunks[2]);
+        } else {
+          console.error('Invalid input');
+        }
+      } else if (query.startsWith('decompress ')) {
+        const commandChunks = query.split(' ');
+        if (commandChunks.length === 3) {
+          decompress(commandChunks[1], commandChunks[2]);
         } else {
           console.error('Invalid input');
         }
