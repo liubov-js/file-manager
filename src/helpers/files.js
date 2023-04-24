@@ -36,8 +36,10 @@ export const rename = (pathToFile, newFileName) => {
 export const copy = (pathToFile, pathToNewDir) => {
   const fileName = pathToFile.split(path.sep).pop();
   const writable = fs.createWriteStream(path.join(pathToNewDir, fileName), {encoding: 'utf8'})
-  fs.createReadStream(pathToFile).pipe(writable);
-  // TODO errors handling???
+  fs
+    .createReadStream(pathToFile)
+    .pipe(writable)
+    .on("error", () => console.error('Operation failed'));
 }
 
 export const move = (pathToFile, pathToNewDir) => {

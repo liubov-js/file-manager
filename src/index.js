@@ -10,11 +10,7 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-const argWithUserName = process.argv.find(arg => arg.startsWith('--username=')); // TODO: improve in package.json
-
-if (!argWithUserName) {
-  // TODO
-}
+const argWithUserName = process.argv.find(arg => arg.startsWith('--username=')) || '--username=user';
 
 const userName = argWithUserName.slice(11);
 
@@ -29,7 +25,6 @@ const awaitedQuery = async () => query = await prompt('');
 (async() => {
   try {
     const rootDir = os.homedir();
-    // const currentDir = process.cwd();
 
     while (true) {
       await awaitedQuery();
